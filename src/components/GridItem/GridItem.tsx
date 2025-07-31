@@ -1,5 +1,16 @@
+import type { Photo } from "../../types/photo";
 import style from "./GridItem.module.css";
 
-export default function GridItem({ children }) {
-  return <li className={style.item}>{children}</li>;
+interface GridItemProps {
+  children: React.ReactNode;
+  onClick: (photo: Photo) => void;
+  photo: Photo;
+}
+
+export default function GridItem({ children, onClick, photo }: GridItemProps) {
+  return (
+    <li key={photo.id} onClick={() => onClick(photo)} className={style.item}>
+      {children}
+    </li>
+  );
 }
