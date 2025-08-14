@@ -52,34 +52,27 @@ export default function App() {
       <div className={css.app}>
         <Toaster />
         <Section>
-          <Container
-            children={
-              <>
-                <Form onSubmit={handleSearch}></Form>
-                {isError ? (
-                  <Text>
-                    <p>"Error of loading data from server"</p>
-                  </Text>
-                ) : (
-                  photos.length > 0 && (
-                    <PhotosGallery
-                      array={photos}
-                      onSelect={handleSelectPhoto}
-                    ></PhotosGallery>
-                  )
-                )}
-                {isLoading && <Loader />}
-                {selectedPhoto && (
-                  <Modal onClose={closePhotoModal}>
-                    <img
-                      src={selectedPhoto?.src.large}
-                      alt={selectedPhoto?.alt}
-                    />
-                  </Modal>
-                )}
-              </>
-            }
-          ></Container>
+          <Container>
+            <Form onSubmit={handleSearch}></Form>
+            {isError ? (
+              <Text>
+                <p>"Error of loading data from server"</p>
+              </Text>
+            ) : (
+              photos.length > 0 && (
+                <PhotosGallery
+                  array={photos}
+                  onSelect={handleSelectPhoto}
+                ></PhotosGallery>
+              )
+            )}
+            {isLoading && <Loader />}
+            {selectedPhoto && (
+              <Modal onClose={closePhotoModal}>
+                <img src={selectedPhoto?.src.large} alt={selectedPhoto?.alt} />
+              </Modal>
+            )}
+          </Container>
         </Section>
       </div>
     </>

@@ -1,5 +1,4 @@
 import type { Photo } from "../../types/photo";
-import GridItem from "../GridItem/GridItem";
 
 import styles from "./PhotosGalleryItem.module.css";
 
