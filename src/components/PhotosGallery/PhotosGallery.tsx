@@ -12,12 +12,9 @@ export default function PhotosGallery({ array, onSelect }: PhotosGalleryProp) {
     <Grid>
       {array.map((photo) => {
         return (
-          <GridItem
-            key={photo.id}
-            onClick={onSelect}
-            photo={photo}
-            children={<PhotosGalleryItem photo={photo} />}
-          ></GridItem>
+          <GridItem key={photo.id} onClick={onSelect} photo={photo}>
+            <PhotosGalleryItem photo={photo} />
+          </GridItem>
         );
       })}
     </Grid>

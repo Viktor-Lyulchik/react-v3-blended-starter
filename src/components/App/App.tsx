@@ -57,7 +57,9 @@ export default function App() {
               <>
                 <Form onSubmit={handleSearch}></Form>
                 {isError ? (
-                  <Text children="Error of loading data from server" />
+                  <Text>
+                    <p>"Error of loading data from server"</p>
+                  </Text>
                 ) : (
                   photos.length > 0 && (
                     <PhotosGallery
@@ -68,15 +70,12 @@ export default function App() {
                 )}
                 {isLoading && <Loader />}
                 {selectedPhoto && (
-                  <Modal
-                    onClose={closePhotoModal}
-                    children={
-                      <img
-                        src={selectedPhoto?.src.large}
-                        alt={selectedPhoto?.alt}
-                      />
-                    }
-                  ></Modal>
+                  <Modal onClose={closePhotoModal}>
+                    <img
+                      src={selectedPhoto?.src.large}
+                      alt={selectedPhoto?.alt}
+                    />
+                  </Modal>
                 )}
               </>
             }
