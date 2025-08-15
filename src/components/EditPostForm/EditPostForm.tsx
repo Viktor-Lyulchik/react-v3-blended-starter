@@ -1,11 +1,45 @@
 import * as Yup from "yup";
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { Field, Form, Formik, ErrorMessage } from "formik";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import type { FormikHelpers } from "formik";
+import toast from "react-hot-toast";
 
 import css from "./EditPostForm.module.css";
+import { Post } from "../../types/post";
+import { editPost } from "../../services/postService";
 
-export default function EditPostForm() {
+const OrderSchema = Yup.object().shape({
+  title: Yup.string().min(3, "Too short!").max(50, "Too long!").required("Required"),
+  body: Yup.string().max(500, "Too long!"),
+});
+
+interface EditFormProps {
+  onClose: () => void;
+  currentPost: Post;
+}
+
+export default function EditPostForm({ onClose, currentPost }: EditFormProps) {
+  const queryClient = useQueryClient();
+
+  const { mutate: editMutation, isPending } = useMutation({
+    mutationFn: editPost,
+    onSuccess() {
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
+      onClose();
+      toast.success("Editing post successfully!");
+    },
+    onError() {
+      toast.error("Error editing post!");
+    },
+  });
+
+  const handleSubmit = async (values: Post, formikHelpers: FormikHelpers<Post>) => {
+    editMutation(values);
+    formikHelpers.resetForm();
+  };
+
   return (
-    <Formik initialValues={} onSubmit={} validationSchema={}>
+    <Formik initialValues={currentPost} validationSchema={OrderSchema} onSubmit={handleSubmit}>
       <Form className={css.form}>
         <div className={css.formGroup}>
           <label htmlFor="title">Title</label>
@@ -20,10 +54,10 @@ export default function EditPostForm() {
         </div>
 
         <div className={css.actions}>
-          <button type="button" className={css.cancelButton}>
+          <button type="button" className={css.cancelButton} onClick={onClose}>
             Cancel
           </button>
-          <button type="submit" className={css.submitButton} disabled={}>
+          <button type="submit" className={css.submitButton} disabled={isPending}>
             Edit post
           </button>
         </div>
