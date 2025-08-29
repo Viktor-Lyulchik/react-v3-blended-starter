@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+
+.postsWrapper {
+  width: 100%;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #2c2c2c;
+  color: white;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  border-right: 1px solid #ddd;
+}
