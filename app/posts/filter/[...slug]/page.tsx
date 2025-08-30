@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import css from './page.module.css';
 import PostsClient from './Posts.client';
 import { fetchPosts } from '@/lib/api';
@@ -5,6 +6,17 @@ import { fetchPosts } from '@/lib/api';
 type PostsPageProps = {
   params: Promise<{ slug: string[] }>;
 };
+
+export async function generateMetadata({ params }: PostsPageProps): Promise<Metadata> {
+  const { slug } = await params;
+
+  const userId = slug[0];
+
+  return {
+    title: `Posts - ${userId}`,
+    description: `Posts - ${userId}`,
+  };
+}
 
 export default async function PostsPage({ params }: PostsPageProps) {
   const { slug } = await params;
