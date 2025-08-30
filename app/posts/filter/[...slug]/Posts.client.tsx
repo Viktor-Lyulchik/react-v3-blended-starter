@@ -3,16 +3,18 @@
 import { useState } from 'react';
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import { useDebouncedCallback } from 'use-debounce';
+
+import { fetchPosts } from '@/lib/api';
+import { Post } from '@/types/post';
+
+import Modal from '@/components/Modal/Modal';
+import EditPostForm from '@/components/EditPostForm/EditPostForm';
+import CreatePostForm from '@/components/CreatePostForm/CreatePostForm';
 import PostList from '@/components/PostList/PostList';
 import SearchBox from '@/components/SearchBox/SearchBox';
 import Pagination from '@/components/Pagination/Pagination';
-import { fetchPosts } from '@/lib/api';
 
 import css from './page.module.css';
-import Modal from '@/components/Modal/Modal';
-import { Post } from '@/types/post';
-import EditPostForm from '@/components/EditPostForm/EditPostForm';
-import CreatePostForm from '@/components/CreatePostForm/CreatePostForm';
 
 interface PostsClientProps {
   initialData: { posts: Post[]; totalCount: number };

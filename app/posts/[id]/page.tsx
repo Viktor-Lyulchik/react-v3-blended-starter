@@ -1,7 +1,7 @@
 import { QueryClient, HydrationBoundary, dehydrate } from '@tanstack/react-query';
+import type { Metadata } from 'next';
 import PostDetailsClient from './PostDetails.client';
 import { fetchPostById } from '@/lib/api';
-import type { Metadata } from 'next';
 
 type Props = {
   params: Promise<{ id: number }>;

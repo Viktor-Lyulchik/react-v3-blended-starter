@@ -1,12 +1,15 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import css from './UsersMenu.module.css';
+import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
-import DropdownPortal from '@/components/DropdownPortal/DropdownPortal';
+
 import { fetchUsers } from '@/lib/api';
 import { User } from '@/types/user';
-import { useQuery } from '@tanstack/react-query';
+
+import DropdownPortal from '@/components/DropdownPortal/DropdownPortal';
+
+import css from './UsersMenu.module.css';
 
 export default function UsersMenu() {
   const [isOpenMenu, setIsOpenMenu] = useState(false);

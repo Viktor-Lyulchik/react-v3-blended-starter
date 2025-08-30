@@ -2,12 +2,12 @@
 
 import { useParams, useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
 
 import { fetchPostById, fetchUserById } from '@/lib/api';
+import { User } from '@/types/user';
 
 import css from './PostDetails.module.css';
-import { useEffect, useState } from 'react';
-import { User } from '@/types/user';
 
 export default function PostDetailsClient() {
   const { id } = useParams<{ id: string }>();

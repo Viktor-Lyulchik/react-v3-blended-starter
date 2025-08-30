@@ -1,6 +1,6 @@
+import Link from 'next/link';
 import { fetchUsers } from '@/lib/api';
 import css from './SidebarNotes.module.css';
-import Link from 'next/link';
 
 export default async function SidebarNotes() {
   const users = await fetchUsers();

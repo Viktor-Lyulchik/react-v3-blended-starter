@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
-import css from './page.module.css';
+
 import PostsClient from './Posts.client';
 import { fetchPosts } from '@/lib/api';
+
+import css from './page.module.css';
 
 type PostsPageProps = {
   params: Promise<{ slug: string[] }>;
