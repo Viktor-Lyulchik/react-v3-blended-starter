@@ -36,6 +36,7 @@ export default function PostPreviewClient() {
     if (userId > 0) {
       fn().then((user) => {
         setCurrentUser(user);
+        setModalOpen(true);
       });
     }
   }, [post]);
@@ -46,11 +47,14 @@ export default function PostPreviewClient() {
 
   const handleClickBack = () => {
     router.back();
+    setModalOpen(false);
   };
 
   if (isLoading) return <p>Loading, please wait...</p>;
 
   if (error || !post) return <p>Something went wrong.</p>;
+
+  console.log('modalIsOpen', modalIsOpen);
 
   return (
     modalIsOpen && (

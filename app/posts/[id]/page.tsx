@@ -1,10 +1,22 @@
 import { QueryClient, HydrationBoundary, dehydrate } from '@tanstack/react-query';
 import PostDetailsClient from './PostDetails.client';
 import { fetchPostById } from '@/lib/api';
+import type { Metadata } from 'next';
 
 type Props = {
   params: Promise<{ id: number }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = await params;
+
+  const post = await fetchPostById(Number(id)).then((res) => res);
+
+  return {
+    title: post.title,
+    description: post.body.slice(0, 30),
+  };
+}
 
 const PostDetails = async ({ params }: Props) => {
   const { id } = await params;
